@@ -1,0 +1,7 @@
+<h1>Your listings</h1>
+
+<%= render partial: 'shared/errors' %>
+
+<%= @listings.each do |l| %>
+  <%= link_to l.title, host_listing_path(l) %>
+<% end %>

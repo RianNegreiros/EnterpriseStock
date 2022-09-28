@@ -9,6 +9,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google[:maps] %>&libraries=places&callback=initMap" defer data-turbolinks-eval="false">
+    </script>
   </head>
 
   <body>

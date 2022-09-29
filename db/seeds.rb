@@ -1,5 +1,6 @@
 user = User.new(
   email: 'user1@test.com',
+  name: 'usertest',
   password: 'usertest',
   password_confirmation: 'usertest',
   created_at: DateTime.now

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
+  root to: 'static_pages#home'
+
+  resources :listings, only: [:index, :show]
   
   namespace :host do
     resources :listings do

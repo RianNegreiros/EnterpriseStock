@@ -3,7 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 window.initMap = () => {
-  const event = new Event("MapLoaded")
-  event.initEvent("map-loaded", true, true);
+  const event = new CustomEvent("map-loaded", {bubbles:true, cancelable:true})
   window.dispatchEvent(event)
 }

@@ -72,3 +72,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "stripe", "~> 7.1"
+
+gem "resque", "~> 2.4"

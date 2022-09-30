@@ -57,7 +57,9 @@ class Host::ListingsController < ApplicationController
       :postal_code,
       :country,
       :lat,
-      :lng
+      :lng,
+      :nightly_price,
+      :cleaning_fee
     )
   end
 
@@ -65,7 +67,10 @@ class Host::ListingsController < ApplicationController
     params.require(:listing).permit(
       :title,
       :about,
-      :max_guests
+      :max_guests,
+      :status,
+      :nightly_price,
+      :cleaning_fee
     )
   end
 end

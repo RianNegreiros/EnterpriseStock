@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_29_175207) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_30_192607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_175207) do
     t.index ["room_id"], name: "index_beds_on_room_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.text "request_body"
+    t.integer "status", default: 0
+    t.text "error_message"
+    t.string "source"
+    t.string "event_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "listings", force: :cascade do |t|
     t.bigint "host_id", null: false
     t.string "title", null: false
@@ -66,6 +76,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_175207) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "nightly_price"
+    t.integer "cleaning_fee"
+    t.string "stripe_product_id"
     t.index ["host_id"], name: "index_listings_on_host_id"
   end
 
@@ -75,6 +88,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_175207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["listing_id"], name: "index_photos_on_listing_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.string "session_id"
+    t.bigint "guest_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "stripe_payment_intent_id"
+    t.string "stripe_refund_id"
+    t.index ["guest_id"], name: "index_reservations_on_guest_id"
+    t.index ["listing_id"], name: "index_reservations_on_listing_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -108,6 +134,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_175207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "stripe_customer_id"
+    t.boolean "is_host", default: false
+    t.string "stripe_account_id"
+    t.boolean "charges_enabled", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -119,5 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_175207) do
   add_foreign_key "beds", "rooms"
   add_foreign_key "listings", "users", column: "host_id"
   add_foreign_key "photos", "listings"
+  add_foreign_key "reservations", "listings"
+  add_foreign_key "reservations", "users", column: "guest_id"
   add_foreign_key "rooms", "listings"
 end

@@ -17,7 +17,10 @@ listing = Listing.create!(
   city: "listing city",
   state: "listing state",
   postal_code: "listing postal code",
-  country: "listing country"
+  country: "listing country",
+  status: Random.rand(0...2),
+  nightly_price: Random.rand(1...999),
+  cleaning_fee: Random.rand(1...999)
 )
 
 room = Room.create!(

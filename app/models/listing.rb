@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   has_many :rooms
+  has_many :photos
   validates :title, presence: true
   validates :max_guests, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
   belongs_to :host, class_name: 'User'

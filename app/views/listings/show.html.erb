@@ -10,6 +10,10 @@
   <%= @listing.max_guests %>
 </p>
 
+<% if @listing.photos.exists? %>
+  <%= image_tag @listing.photos.first.photo.variant(resize_to_limit: [100, 100]) %>
+<% end %>
+
 <ul>
   <% @listing.rooms.each do |room| %>
     <li><%= room.room_types %> beds: <%= room.beds.count %></li>

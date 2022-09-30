@@ -1,4 +1,19 @@
-<h1 class="text-2xl font-bold"><%= @listing.title %></h1>
+<h1 class="text-2xl font-bold mb-4"><%= @listing.title %></h1>
+
+<div>
+  Per night <%= number_to_currency(@listing.nightly_price / 100, precision: 0) %>
+</div>
+
+<div>
+  Cleaning Fee <%= number_to_currency(@listing.cleaning_fee / 100, precision: 0) %>
+</div>
+
+<form action="/reservations", method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="reservation[listing_id]" value="<%= @listing.id %>">
+  
+  <input type="submit" value="Reserve" data-turbo="false">
+</form>
 
 <%= @listing.city %>, <%= @listing.state %>
 
@@ -16,7 +31,7 @@
 
 <ul>
   <% @listing.rooms.each do |room| %>
-    <li><%= room.room_types %> beds: <%= room.beds.count %></li>
+    <li><%= room.room_type %> beds: <%= room.beds.count %></li>
   <% end %>
 </ul>
 

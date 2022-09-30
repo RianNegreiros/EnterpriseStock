@@ -1,0 +1,37 @@
+<h1 class="text-3xl">List your property</h1>
+
+<%= render partial: "shared/errors" %>
+
+<form action="/host/listings" method="post" class="space-y-8 divide-y divide-gray-200">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+
+  <div class="sm:col-span-6">
+    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+    <input type="text" name="listing[title]" id="title" value="<%= @listing.title %>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+  </div>
+
+  <div class="sm:col-span-6">
+    <label for="about" class="block text-sm font-medium text-gray-700">About</label>
+    <textarea id="about" name="listing[about]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"><%= @listing.about %></textarea>
+  </div>
+
+  <div data-controller="address" data-action="map-loaded@window->address#initGoogle" class="sm:col-span-6">
+    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+    <input type="text" id ="address" data-address-target="input" autocomplete="off" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+
+    <input type="hidden" name="listing[address_line1]" data-address-target="line1">
+    <input type="hidden" name="listing[address_line2]" data-address-target="line2">
+    <input type="hidden" name="listing[city]" data-address-target="city">
+    <input type="hidden" name="listing[state]" data-address-target="state">
+    <input type="hidden" name="listing[postal_code]" data-address-target="postal_code">
+    <input type="hidden" name="listing[country]" data-address-target="country">
+    <input type="hidden" name="listing[lat]" data-address-target="lat">
+    <input type="hidden" name="listing[lng]" data-address-target="lng">
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <label for="max_guests" class="block text-sm font-medium text-gray-700">How many people maximum can stay ?</label>
+    <input type="number" id="max_guests" name="listing[max_guests]" value="<%= @listing.max_guests %>" min="1" max="100" step="1" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+  </div>
+
+<button type="submit" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create listing</button></form>

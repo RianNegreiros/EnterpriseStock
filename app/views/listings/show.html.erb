@@ -1,0 +1,26 @@
+<h1 class="text-2xl font-bold"><%= @listing.title %></h1>
+
+<%= @listing.city %>, <%= @listing.state %>
+
+<p>
+  <%= @listing.about %>
+</p>
+
+<p>
+  <%= @listing.max_guests %>
+</p>
+
+<% if @listing.photos.exists? %>
+  <%= image_tag @listing.photos.first.photo.variant(resize_to_limit: [100, 100]) %>
+<% end %>
+
+<ul>
+  <% @listing.rooms.each do |room| %>
+    <li><%= room.room_types %> beds: <%= room.beds.count %></li>
+  <% end %>
+</ul>
+
+<div>
+  <h4>Host</h4>
+  <%= @listing.host.name %>
+</div>

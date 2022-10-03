@@ -20,5 +20,6 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-<%= button_to  'Login with Google', user_google_omniauth_authorize_path, method: :post, :data => {turbo: "false"} %>  <% end %>
+    <%= button_to  'Login with Google', user_google_omniauth_authorize_path, method: :post, :data => {turbo: "false"} %>  
+  <% end %>
 <% end %>

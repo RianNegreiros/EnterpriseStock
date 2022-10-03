@@ -4,6 +4,11 @@ class ReservationsController < ApplicationController
   def index
   end
 
+  def expire
+    Stripe::Checkout::Session.expire(params[:session_id])
+    redirect_to listings_path
+  end
+
   def cancel
     @reservation = current_user.reservations.find(params[:id])
     refund = Stripe::Refund.create({
@@ -13,48 +18,21 @@ class ReservationsController < ApplicationController
     redirect_to reservation_path(@reservation)
   end
 
+  def new
+    @listing = Listing.find(params[:listing_id])
+    @calendar_events = @listing.calendar_events
+  end
+
   def create
-    @reservation = current_user.reservations.new(reservation_params)
-    if @reservation.save
-      listing = @reservation.listing
-      checkout_session = Stripe::Checkout::Session.create(
-        success_url: reservation_url(@reservation),
-        cancel_url: listing_url(listing),
-        customer: current_user.stripe_customer_id,
-        mode: 'payment',
-        line_items: [{
-          price_data: {
-            unit_amount: listing.nightly_price,
-            currency: 'usd',
-            product: listing.stripe_product_id,
-          },
-          quantity: 1
-        }, {
-          price_data: {
-            unit_amount: listing.cleaning_fee,
-            currency: 'usd',
-            product: 'prod_MWnJL6raBRxnNp'
-          },
-          quantity: 1
-        }],
-        metadata: {
-          reservation_id: @reservation.id
-        },
-        payment_intent_data: {
-          application_fee_amount: ((listing.cleaning_fee + listing.nightly_price) * 0.10).to_i,
-          transfer_data: {
-            destination: listing.host.stripe_account_id
-          },
-          metadata: {
-            reservation_id: @reservation.id
-          }
-        }
-      )
-      @reservation.update(session_id: checkout_session.id)
-      redirect_to checkout_session.url, allow_other_host: true
+    @booking = BookListing.new(current_user, reservation_params)
+
+    if @booking.save
+      redirect_to @booking.checkout_url, allow_other_host: true, status: :see_other
     else
-      flash[:errors] = @reservation.errors.full_messages
-      redirect_to listing_path(params[:reservations][:listing_id])
+      flash.now[:errors] = @booking.errors
+      @listing = @booking.listing
+      @calendar_events = @listing.calendar_events
+      render :new
     end
   end
 
@@ -65,6 +43,6 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:listing_id)
+    params.require(:reservation).permit(:listing_id, :start_date, :end_date)
   end
 end

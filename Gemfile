@@ -76,3 +76,5 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "stripe", "~> 7.1"
 
 gem "resque", "~> 2.4"
+
+gem "validates_overlap", "~> 1.0"

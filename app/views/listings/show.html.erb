@@ -8,12 +8,9 @@
   Cleaning Fee <%= number_to_currency(@listing.cleaning_fee / 100, precision: 0) %>
 </div>
 
-<form action="/reservations", method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="reservation[listing_id]" value="<%= @listing.id %>">
-  
-  <input type="submit" value="Reserve" data-turbo="false">
-</form>
+<div>
+<%= link_to "Reserve", new_reservation_path(listing_id: @listing.id) %>
+</div>
 
 <%= @listing.city %>, <%= @listing.state %>
 

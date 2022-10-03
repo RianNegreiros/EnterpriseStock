@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   has_many :rooms
   has_many :photos
+  has_many :calendar_events
   validates :title, presence: true
   validates :max_guests, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
   validates :nightly_price, numericality: { greater_than: 0 }

@@ -1,9 +1,11 @@
 class ListingsController < ApplicationController
+  include Pagy::Backend
+
   def index
-    @listings = Listing.where(status: :published)
+    @pagy, @listings = pagy(Listing.published, items: 6)
   end
 
   def show
-    @listing = Listing.where(status: :published).find(params[:id])
+    @listing = Listing.published.find(params[:id])
   end
 end

@@ -17,12 +17,14 @@ class EventJob < ApplicationJob
       rescue => e
         event.update(
           error_message: e.message,
-          status: :failed)
+          status: :failed
+        )
       end
     else
       event.update(
-        error_message: "Unknown source #{stripe_event.source}",
-        status: :failed)
+        error_message: "Unknown source #{event.source}",
+        status: :failed
+      )
     end
   end
 
@@ -33,6 +35,7 @@ class EventJob < ApplicationJob
       user = User.find_by(stripe_account_id: account.id)
       user.update(charges_enabled: account.charges_enabled)
     when "checkout.session.completed"
+      # do something with the checkout session and the reservation here.
       checkout_session = event.data.object
       reservation = Reservation.find_by(session_id: checkout_session.id)
       if reservation.nil?
@@ -52,9 +55,20 @@ class EventJob < ApplicationJob
       charge = event.data.object
       reservation = Reservation.find_by(stripe_payment_intent_id: charge.payment_intent)
       if reservation.nil?
-        raise "No reservation found with Payment Itent ID #{charge.payment_intent.id}"
+        raise "No reservation found with Payment Intent ID #{charge.payment_intent}"
       end
       reservation.update(status: :cancelled)
+    when "identity.verification_session.verified"
+      session = event.data.object
+      user = User.find_by(id: session.metadata.user_id)
+      if user.nil?
+        raise "No user found with ID #{session.metadata.user_id}"
+      end
+      if session.status == "verified"
+        user.update(identity_verified: true)
+      else
+        user.update(identity_verified: false)
+      end
     end
   end
 end

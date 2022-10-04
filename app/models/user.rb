@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :listings, foreign_key: :host_id
   has_many :reservations, foreign_key: :guest_id
   has_many :host_reservations, class_name: 'Reservation', through: :listings, source: :reservations
+  has_many :notifications, as: :recipient, dependent: :destroy
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'from_user_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'to_user_id'
+
   after_commit :maybe_create_stripe_customer, on: [:create, :update]
 
   def all_reservations

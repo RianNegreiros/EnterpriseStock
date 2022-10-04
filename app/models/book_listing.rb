@@ -9,7 +9,9 @@ class BookListing
   end
 
   def save
-    calendar_event.save && reservation.save
+    if valid?
+      calendar_event.save && reservation.save
+    end
   end
 
   def valid?

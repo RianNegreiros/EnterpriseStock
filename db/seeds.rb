@@ -1,32 +1,51 @@
-user = User.new(
+user1 = User.new(
   email: 'user1@test.com',
   name: 'usertest',
   password: 'usertest',
   password_confirmation: 'usertest',
   created_at: DateTime.now
 )
-user.skip_confirmation!
-user.save!
+user1.skip_confirmation!
+user1.save!
 
-listing = Listing.create!(
-  host: user,
-  title: "listing title",
-  about: "listing about",
-  address_line1: "listing address line 1",
-  address_line2: "listing address line 2",
-  city: "listing city",
-  state: "listing state",
-  postal_code: "listing postal code",
-  country: "listing country",
-  status: Random.rand(0...2),
-  nightly_price: Random.rand(1...999),
-  cleaning_fee: Random.rand(1...999)
+user2 = User.new(
+  email: 'user2@test.com',
+  name: 'usertest',
+  password: 'usertest',
+  password_confirmation: 'usertest',
+  created_at: DateTime.now
 )
+user2.skip_confirmation!
+user2.save!
 
-room = Room.create!(
-  listing: listing
-)
+10.times do
+  listing = Listing.create(
+    host: user1,
+    title: Faker::Lorem.words.join(" "),
+    about: Faker::Lorem.paragraphs.join("\n"),
+    max_guests: (1...15).to_a.sample,
+    address_line1: Faker::Address.street_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: 'US',
+    status: [:draft, :published].sample,
+    nightly_price: 12000,
+    cleaning_fee: 5000,
+  )
+end
 
-Bed.create!(
-  room: room
-)
+10.times do
+  listing = Listing.create(
+    host: user2,
+    title: Faker::Lorem.words.join(" "),
+    about: Faker::Lorem.paragraphs.join("\n"),
+    max_guests: (1...15).to_a.sample,
+    address_line1: Faker::Address.street_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: 'US',
+    status: [:draft, :published].sample,
+    nightly_price: 12000,
+    cleaning_fee: 5000,
+  )
+end

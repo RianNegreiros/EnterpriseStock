@@ -15,6 +15,9 @@ export default class extends Controller {
 
   connect() {
     console.log("Address controller connected")
+    if(window.google) {
+      this.initGoogle();
+    }
   }
 
   initGoogle() {

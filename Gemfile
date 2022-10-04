@@ -82,3 +82,5 @@ gem "validates_overlap", "~> 1.0"
 gem "pagy", "~> 5.10"
 
 gem "faker", "~> 2.23"
+
+gem "noticed", "~> 1.6"

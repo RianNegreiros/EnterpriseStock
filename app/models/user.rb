@@ -7,8 +7,12 @@ class User < ApplicationRecord
   
   has_many :listings, foreign_key: :host_id
   has_many :reservations, foreign_key: :guest_id
-
+  has_many :host_reservations, class_name: 'Reservation', through: :listings, source: :reservations
   after_commit :maybe_create_stripe_customer, on: [:create, :update]
+
+  def all_reservations
+    Reservation.where(guest: self).or(Reservation.where(listing: listings))
+  end
 
   def maybe_create_stripe_customer
     return if !stripe_customer_id.blank?
@@ -17,10 +21,10 @@ class User < ApplicationRecord
       email: email,
       name: name,
       metadata: {
-        lodging_id: self.id
+        lodging_id: id
       }
     )
-    self.update(stripe_customer_id: customer.id)
+    update(stripe_customer_id: customer.id)
   end
   
         def self.from_omniauth(auth)

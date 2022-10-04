@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :photos, only: [:index, :create, :destroy]
       resources :rooms, only: [:index, :create, :destroy]
     end
+    resources :reservations, only: [:show]
   end
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

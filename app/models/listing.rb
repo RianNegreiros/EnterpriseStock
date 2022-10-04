@@ -2,6 +2,7 @@ class Listing < ApplicationRecord
   has_many :rooms
   has_many :photos
   has_many :calendar_events
+  has_many :reservations
   validates :title, presence: true
   validates :max_guests, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
   validates :nightly_price, numericality: { greater_than: 0 }
@@ -19,10 +20,10 @@ class Listing < ApplicationRecord
       name: title,
       url: Rails.application.routes.url_helpers.url_for(self),
       metadata: {
-        lodging_id: self.id
+        lodging_id: id
       }
     )
-    self.update(stripe_product_id: product.id)
+    update(stripe_product_id: product.id)
   end
 
   def address

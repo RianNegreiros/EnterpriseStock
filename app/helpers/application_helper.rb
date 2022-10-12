@@ -22,4 +22,12 @@ module ApplicationHelper
       "false"
     end
   end
+
+  def unsplash_photo(keyword)
+    random = rand(9)
+    photo = Unsplash::Photo.search(keyword)
+    photo[random]['width'] = 512
+    photo[random]['height'] = 80
+    photo[random]['urls']['raw']
+  end
 end

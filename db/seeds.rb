@@ -1,8 +1,16 @@
+user = User.find_or_create_by!(
+  email: 'user@test.com',
+) do |u|
+  u.password = '123456'
+  u.skip_confirmation!
+end
+
 10.times do
-  listing = Listing.create(
+  listing = Listing.create!(
+    host: user,
     title: Faker::Lorem.words.join(" "),
     about: Faker::Lorem.paragraphs.join("\n"),
-    max_guests: Faker::Number.number(digits: 20),
+    max_guests: Faker::Number.number(digits: 2),
     address_line1: Faker::Address.street_address,
     city: Faker::Address.city,
     state: Faker::Address.state,
@@ -15,11 +23,20 @@
   )
 end
 
+10.times do
+  host = User.create!(
+    email: Faker::Internet.email,
+    password: Faker::Internet.password
+  ) do |h|
+    h.skip_confirmation!
+  end
+  
   10.times do
-    listing = Listing.create(
+    listing = Listing.create!(
+      host: host,
       title: Faker::Lorem.words.join(" "),
       about: Faker::Lorem.paragraphs.join("\n"),
-      max_guests: Faker::Number.number(digits: 20),
+      max_guests: Faker::Number.number(digits: 2),
       address_line1: Faker::Address.street_address,
       city: Faker::Address.city,
       state: Faker::Address.state,
@@ -31,3 +48,4 @@ end
       cleaning_fee: Faker::Number.decimal(l_digits: 2, r_digits: 2),
     )
   end
+end

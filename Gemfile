@@ -84,3 +84,5 @@ gem "pagy", "~> 5.10"
 gem "faker", "~> 2.23"
 
 gem "noticed", "~> 1.6"
+
+gem "unsplash", "~> 3.0"

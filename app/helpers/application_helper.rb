@@ -30,4 +30,9 @@ module ApplicationHelper
     photo[random]['height'] = 80
     photo[random]['urls']['raw']
   end
+
+  def gravatar_url
+    gravatar_id = Digest::MD5::hexdigest(current_user.email.downcase)
+    "https://secure.gravatar.com/avatar/#{gravatar_id}"
+  end
 end

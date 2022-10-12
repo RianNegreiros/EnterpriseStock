@@ -1,38 +1,68 @@
-<h1 class="text-2xl font-bold mb-4"><%= @listing.title %></h1>
-
-<div>
-  Per night <%= number_to_currency(@listing.nightly_price / 100, precision: 0) %>
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-lg font-medium leading-6 text-gray-900"><%= @listing.title %></h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= @listing.about %></p>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Per night</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= number_to_currency(@listing.nightly_price / 100, precision: 0) %></dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Cleaning fee</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= number_to_currency(@listing.cleaning_fee / 100, precision: 0) %></dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Address</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @listing.city %>, <%= @listing.state %></dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Max Guests</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @listing.max_guests %></dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Host</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @listing.host.email %></dd>
+      </div>
+      <% @listing.rooms.each do |room| %>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500"><%= room.room_type.capitalize %></dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+          <ul role="list" class="divide-y divide-gray-200 rounded-md">
+            <li class="flex items-center py-3 pl-3 pr-4 text-sm">
+              <div class="flex w-0 flex-1 items-center">
+                <span class="ml-2 w-0 flex-1 truncate">beds: <%= room.beds.count %></span>
+              </div>
+              <div class="ml-4 flex-shrink-0">
+                <span class="ml-2 w-0 flex-1 truncate"></span>              
+              </div>
+            </li>
+          </ul>
+        </dd>
+        <% end %>
+      </div>
+    </dl>
+  </div>
 </div>
-
-<div>
-  Cleaning Fee <%= number_to_currency(@listing.cleaning_fee / 100, precision: 0) %>
-</div>
-
-<div>
-<%= link_to "Reserve", new_reservation_path(listing_id: @listing.id) %>
-</div>
-
-<%= @listing.city %>, <%= @listing.state %>
-
-<p>
-  <%= @listing.about %>
-</p>
-
-<p>
-  <%= @listing.max_guests %>
-</p>
 
 <% if @listing.photos.exists? %>
-  <%= image_tag @listing.photos.first.photo.variant(resize_to_limit: [100, 100]) %>
-<% end %>
 
-<ul>
-  <% @listing.rooms.each do |room| %>
-    <li><%= room.room_type %> beds: <%= room.beds.count %></li>
-  <% end %>
-</ul>
+<div class="bg-white">
+  <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Photos</h2>
 
-<div>
-  <h4>Host</h4>
-  <%= @listing.host.name %>
+    <% @listing.photos.each do |photo| %>
+
+    <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      <div class="group relative">
+        <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+          <%= image_tag photo.photo.variant(resize_to_limit: [100, 100], class: "h-full w-full object-cover object-center lg:h-full lg:w-full") %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
 </div>
+<% end %>

@@ -47,7 +47,7 @@ class BookListing
           price_data: {
             unit_amount: listing.cleaning_fee,
             currency: 'usd',
-            product: 'prod_MWnJL6raBRxnNp'
+            product: 'prod_MbGi8XhLORZTzL'
           },
           quantity: 1
         }],

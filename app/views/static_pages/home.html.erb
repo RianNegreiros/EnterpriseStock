@@ -1,2 +1,42 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+
+            <nav class="w-full">
+                <div class="container mx-auto px-6 flex items-center justify-between">
+                    <div>
+                        <div id="menu" class="md:block lg:block hidden">
+                            <ul class="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent  z-20">
+                                <% if user_signed_in? %>
+                                  <li class="text-gray-600 text-lg hover:text-gray-800 dark:text-white cursor-pointer md:ml-10 pt-10 md:pt-0">
+                                      <a href="/listings">Listings</a>
+                                  </li>
+                                  <li class="text-gray-600 text-lg hover:text-gray-800 dark:text-white cursor-pointer md:ml-10 pt-10 md:pt-0">
+                                      <a href="/users/sign_out">Sign Out</a>
+                                  </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="w-full px-6">
+                <div class="mt-8 relative rounded-lg bg-indigo-700 container mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 lg:pb-56 xl:pb-64">
+                   <img class="mr-2 lg:mr-12 mt-2 lg:mt-12 absolute right-0 top-0"  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg2.svg" alt="bg"/>
+                   <img class="ml-2 lg:ml-12 mb-2 lg:mb-12 absolute bottom-0 left-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg3.svg" alt="bg"/>
+                   
+                    <div class="w-11/12 sm:w-2/3 mb-5 sm:mb-10">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-white font-bold leading-tight">Maecenas accumsan lacus vel facilisis volutpat est velit egestas dui</h1>
+                    </div>
+                    <% if !user_signed_in? %>
+                    <div class="flex justify-center items-center mb-10 sm:mb-20">
+                        <a href="/users/sign_up" class="hover:text-white hover:bg-transparent lg:text-xl hover:border-white border bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-indigo-700	focus:ring-white rounded text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">
+                          Sign Up
+                        </a>
+                    </div>
+                    <% end %>
+                </div>
+                <div class="container mx-auto flex justify-center md:-mt-56 -mt-20 sm:-mt-40">
+                    <div class="relative sm:w-2/3 w-11/12">
+                        <%= image_tag 'app-image-preview.png' %>
+                    </div>
+                </div>
+            </div>
+        

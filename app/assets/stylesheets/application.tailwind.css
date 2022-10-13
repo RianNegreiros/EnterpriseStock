@@ -12,8 +12,6 @@
 
 */
 
-@import "~tailwindcss/base";
-
 .pagy-nav,
 .pagy-nav-js {
   @apply flex space-x-2;

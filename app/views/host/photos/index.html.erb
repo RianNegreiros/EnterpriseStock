@@ -3,11 +3,11 @@
 <%= render partial: "shared/errors" %>
 
 <form action="<%= host_listing_photos_path(@listing) %>" method="POST" class="space-y-8 divide-y divide-gray-200">
+    <input type=file data-direct-upload-url="<%= rails_direct_uploads_url %>" name="photo[photo]" />
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
 
-    <input data-direct-upload-url="<%= rails_direct_uploads_url %>" name="product[photo]" type="file" />
     <div class="sm:col-span-6">
-    <label for="title" class="block text-sm font-medium text-gray-700">
+    <label for="caption" class="block text-sm font-medium text-gray-700">
       Caption
     </label>
     <div class="mt-1">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+  <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
     Upload
   </button>
 </form>

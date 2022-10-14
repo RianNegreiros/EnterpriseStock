@@ -1,4 +1,5 @@
-# A application for short-term rentals like Airbnb 
+# A application for short-term rentals like Airbnb
 
-### Preview
+## Preview
+
 ![Application image preview](/app/assets/images/app-preview-image.png)

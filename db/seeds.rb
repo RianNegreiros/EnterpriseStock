@@ -1,3 +1,10 @@
+host = User.find_or_create_by!(
+  email: 'host@test.com',
+) do |h|
+  h.password = '123456'
+  h.skip_confirmation!
+end
+
 user = User.find_or_create_by!(
   email: 'user@test.com',
 ) do |u|
@@ -5,16 +12,9 @@ user = User.find_or_create_by!(
   u.skip_confirmation!
 end
 
-user2 = User.find_or_create_by!(
-  email: 'user2@test.com',
-) do |u|
-  u.password = '123456'
-  u.skip_confirmation!
-end
-
 10.times do
   listing = Listing.create!(
-    host: user,
+    host: host,
     title: Faker::Lorem.words.join(" "),
     about: Faker::Lorem.paragraphs.join("\n"),
     max_guests: Faker::Number.number(digits: 2),

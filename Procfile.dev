@@ -1,4 +1,0 @@
-web: bin/rails server -p 3000
-css: bin/rails tailwindcss:watch
-resque: QUEUE=* rake resque:work
-stripe: stripe listen --forward-to localhost:3000/webhooks/stripe --forward-connect-to localhost:3000/webhooks/stripe

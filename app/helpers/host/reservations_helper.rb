@@ -1,2 +1,0 @@
-module Host::ReservationsHelper
-end

@@ -1,17 +1,27 @@
-INSERT INTO tb_category(name) VALUES ('Books')
-INSERT INTO tb_category(name) VALUES ('Electronics')
-INSERT INTO tb_category(name) VALUES ('Computers')
-INSERT INTO tb_category(name) VALUES ('Clothing');
-INSERT INTO tb_category(name) VALUES ('Home and Garden');
-INSERT INTO tb_category(name) VALUES ('Toys and Games');
-INSERT INTO tb_category(name) VALUES ('Sports and Outdoors');
-INSERT INTO tb_category(name) VALUES ('Beauty and Personal Care');
-INSERT INTO tb_category(name) VALUES ('Health and Wellness');
-INSERT INTO tb_category(name) VALUES ('Automotive');
-INSERT INTO tb_category(name) VALUES ('Appliances');
-INSERT INTO tb_category(name) VALUES ('Movies and Music');
-INSERT INTO tb_category(name) VALUES ('Office Supplies');
-INSERT INTO tb_category(name) VALUES ('Pet Supplies');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('John', 'Doe', 'johndoe@gmail.com', '$2y$12$ZV.To/HXWxMWaZEiaPiYg.u6CBzQvuEZsCGnI2laz7mMRc2rdikJ6')
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Jane', 'Doe', 'janedoe@gmail.com', '$2y$12$KCeVBVJ.BkwNV6kl/M9nVeqPKcYjjtKfF.7RVdekQkxQwSyR.NgZi')
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR')
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN')
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1)
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1)
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2)
+
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Books', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Electronics', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Computers', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Clothing', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Home and Garden', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Toys and Games', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Sports and Outdoors', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Beauty and Personal Care', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Health and Wellness', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Automotive', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Appliances', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Movies and Music', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Office Supplies', NOW(), NOW());
+INSERT INTO tb_category(name, created_at, updated_at) VALUES ('Pet Supplies', NOW(), NOW());
 
 INSERT INTO tb_product (name, price, date, description, img_url) VALUES ('mattis enim ut tellus', 90.5, TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30');
 INSERT INTO tb_product (name, price, date, description, img_url) VALUES ('ultrices dui sapien eget', 2190.0, TIMESTAMP WITH TIME ZONE '2020-07-14T10:00:00Z', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e');

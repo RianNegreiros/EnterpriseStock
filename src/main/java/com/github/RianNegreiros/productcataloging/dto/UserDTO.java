@@ -1,6 +1,8 @@
 package com.github.RianNegreiros.productcataloging.dto;
 
 import com.github.RianNegreiros.productcataloging.entities.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -10,8 +12,12 @@ public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotEmpty(message = "Mandatory field")
     private String firstName;
     private String lastName;
+
+    @Email(message = "Enter a valid email")
     private String email;
 
     Set<RoleDTO> roles = new HashSet<>();

@@ -2,6 +2,10 @@ package com.github.RianNegreiros.productcataloging.dto;
 
 import com.github.RianNegreiros.productcataloging.entities.Category;
 import com.github.RianNegreiros.productcataloging.entities.Product;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -10,10 +14,19 @@ import java.util.Set;
 
 public class ProductDTO {
     private Long id;
+
+    @Size(min = 5, max = 100)
+    @NotBlank(message = "Mandatory field")
     private String name;
+
+    @NotBlank(message = "Mandatory field")
     private String description;
+
+    @Positive(message = "Price should be a positive number")
     private Double price;
     private String imgUrl;
+
+    @PastOrPresent(message = "Date must on be past")
     private Instant date;
 
     private List<CategoryDTO> categories = new ArrayList<>();

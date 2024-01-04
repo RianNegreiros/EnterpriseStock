@@ -1,7 +1,6 @@
 package com.github.RianNegreiros.productcataloging.entities;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;

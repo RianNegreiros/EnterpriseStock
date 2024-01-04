@@ -4,10 +4,10 @@ import com.github.RianNegreiros.productcataloging.dto.UserInsertDTO;
 import com.github.RianNegreiros.productcataloging.entities.User;
 import com.github.RianNegreiros.productcataloging.repositories.UserRepository;
 import com.github.RianNegreiros.productcataloging.resources.exceptions.FieldMessage;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 

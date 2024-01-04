@@ -10,7 +10,6 @@ import com.github.RianNegreiros.productcataloging.repositories.RoleRepository;
 import com.github.RianNegreiros.productcataloging.repositories.UserRepository;
 import com.github.RianNegreiros.productcataloging.services.exceptions.DatabaseException;
 import com.github.RianNegreiros.productcataloging.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -60,7 +60,7 @@ public class UserService {
     @Transactional
     public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
-            User entity = repository.getReferenceById(id);
+            User entity = repository.getOne(id);
             copyDtoToEntity(dto, entity);
             entity = repository.save(entity);
             return new UserDTO(entity);
@@ -88,7 +88,7 @@ public class UserService {
 
         entity.getRoles().clear();
         for (RoleDTO r : dto.getRoles()) {
-            Role role = roleRepository.getReferenceById(r.getId());
+            Role role = roleRepository.getOne(r.getId());
             entity.getRoles().add(role);
         }
     }

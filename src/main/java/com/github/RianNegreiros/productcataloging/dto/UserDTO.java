@@ -1,9 +1,9 @@
 package com.github.RianNegreiros.productcataloging.dto;
 
 import com.github.RianNegreiros.productcataloging.entities.User;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

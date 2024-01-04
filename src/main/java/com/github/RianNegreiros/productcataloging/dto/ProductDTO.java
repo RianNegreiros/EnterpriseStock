@@ -2,11 +2,12 @@ package com.github.RianNegreiros.productcataloging.dto;
 
 import com.github.RianNegreiros.productcataloging.entities.Category;
 import com.github.RianNegreiros.productcataloging.entities.Product;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;

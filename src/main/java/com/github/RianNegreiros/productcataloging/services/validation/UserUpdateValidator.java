@@ -4,11 +4,12 @@ import com.github.RianNegreiros.productcataloging.dto.UserUpdateDTO;
 import com.github.RianNegreiros.productcataloging.entities.User;
 import com.github.RianNegreiros.productcataloging.repositories.UserRepository;
 import com.github.RianNegreiros.productcataloging.resources.exceptions.FieldMessage;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
 
 import java.util.ArrayList;
 import java.util.List;

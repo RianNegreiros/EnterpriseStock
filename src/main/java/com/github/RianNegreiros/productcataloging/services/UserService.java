@@ -3,6 +3,7 @@ package com.github.RianNegreiros.productcataloging.services;
 import com.github.RianNegreiros.productcataloging.dto.RoleDTO;
 import com.github.RianNegreiros.productcataloging.dto.UserDTO;
 import com.github.RianNegreiros.productcataloging.dto.UserInsertDTO;
+import com.github.RianNegreiros.productcataloging.dto.UserUpdateDTO;
 import com.github.RianNegreiros.productcataloging.entities.Role;
 import com.github.RianNegreiros.productcataloging.entities.User;
 import com.github.RianNegreiros.productcataloging.repositories.RoleRepository;
@@ -57,7 +58,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repository.getReferenceById(id);
             copyDtoToEntity(dto, entity);

@@ -15,7 +15,7 @@ import java.util.Set;
 public class ProductDTO {
     private Long id;
 
-    @Size(min = 5, max = 100)
+    @Size(min = 5, max = 100, message = "Must be between 5 and 100 chars")
     @NotBlank(message = "Mandatory field")
     private String name;
 
